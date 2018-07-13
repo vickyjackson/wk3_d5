@@ -23,7 +23,12 @@ class Customer
 
 
   # Read
-
+  def films()
+    sql = "SELECT films.* FROM films INNER JOIN tickets ON tickets.film_id = film_id WHERE tickets.customer_id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    films = result.map { |film| Film.new(film) }
+  end
 
   # Update
   def update()

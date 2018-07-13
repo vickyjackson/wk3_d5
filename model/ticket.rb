@@ -23,7 +23,7 @@ class Ticket
   end
 
   # Read
-
+  
 
   # Update
   def update()
