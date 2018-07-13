@@ -30,6 +30,14 @@ class Film
     return customers
   end
 
+  def tickets()
+    sql = "SELECT * FROM tickets WHERE tickets.film_id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    tickets = result.map { |ticket| Ticket.new(ticket) }
+    return tickets
+  end
+
   # Update
   def update()
     sql = "UPDATE films SET (title, price) = ($1, $2) WHERE id = $3"
@@ -47,6 +55,11 @@ class Film
   def self.delete_all()
     sql = "DELETE FROM films"
     SqlRunner.run()
+  end
+
+  # Other methods
+  def count_tickets()
+    tickets.count()
   end
 
 end

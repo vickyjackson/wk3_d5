@@ -24,7 +24,7 @@ customer2.save()
 ticket1 = Ticket.new({ 'film_id' => film2.id, 'customer_id' => customer2.id })
 ticket1.save()
 
-ticket2 = Ticket.new({ 'film_id' => film1.id, 'customer_id' => customer1.id })
+ticket2 = Ticket.new({ 'film_id' => film1.id, 'customer_id' => customer2.id })
 ticket2.save()
 #
 # # Update an existing instance of the Film class
@@ -57,5 +57,9 @@ ticket2.save()
 # # Delete all tickets by calling a Ticket class method
 # Ticket.delete_all()
 
-p film1.customers()
-p customer1.films()
+# p film1.customers()
+# p customer1.films()
+
+p film1.tickets.count()
+
+p customer2.count_tickets()
