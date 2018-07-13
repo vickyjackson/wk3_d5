@@ -18,6 +18,6 @@ CREATE TABLE customers(
 
 CREATE TABLE tickets(
   id SERIAL2 PRIMARY KEY,
-  film_id REFERENCES films(id),
-  customer_id REFERENCES customers(id)
+  film_id INT2 REFERENCES films(id) ON DELETE CASCADE,
+  customer_id INT2 REFERENCES customers(id) ON DELETE CASCADE
 );
