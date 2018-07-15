@@ -10,7 +10,7 @@ class Customer
   def initialize(options)
     @id = options['id'].to_i if options['id'] != nil
     @name = options['name']
-    @funds = options['funds']
+    @funds = options['funds'].to_i
   end
 
   # Create
@@ -60,5 +60,9 @@ class Customer
   def count_tickets()
     tickets.count()
   end
+  #
+  # def pay_for_ticket()
+  #   @funds -= ticket.film_id.price
+  # end
 
 end

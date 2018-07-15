@@ -10,7 +10,7 @@ class Film
   def initialize(options)
     @id = options['id'].to_i if options['id'] != nil
     @title = options['title']
-    @price = options['price']
+    @price = options['price'].to_i
   end
 
   # Create
