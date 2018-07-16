@@ -31,11 +31,20 @@ class Film
   end
 
   def tickets()
-    sql = "SELECT * FROM tickets WHERE tickets.film_id = $1"
+    sql = "SELECT tickets.* FROM tickets INNER JOIN screenings ON screenings.id = tickets.screening_id WHERE screenings.film_id = $1"
     values = [@id]
     result = SqlRunner.run(sql, values)
     tickets = result.map { |ticket| Ticket.new(ticket) }
     return tickets
+  end
+
+  def find_most_popular_screening()
+    tickets_sold = tickets()
+    tickets_hash = Hash.new(0)
+    for ticket in tickets_sold
+      tickets_hash[ticket.screening.id] += 1
+    end
+    return tickets_hash.max_by{|k,v| v}
   end
 
   # Update

@@ -7,7 +7,7 @@ require('pry')
 
 class Ticket
 
-  attr_reader :id
+  attr_reader :id, :customer, :screening
 
   def initialize(options)
     @customer = options['customer']

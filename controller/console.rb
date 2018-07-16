@@ -23,19 +23,33 @@ customer2.save()
 
 # Create a new instance of the Screening class and pass it data
 # Call the save method on that instance
-screening1 = Screening.new({ 'screening' => '14:00', 'screen' => 4, 'film_id' => film2.id })
+screening1 = Screening.new({ 'screening' => '10:00', 'screen' => 4, 'film_id' => film1.id })
 screening1.save()
-
-screening2 = Screening.new({ 'screening' => '18:00', 'screen' => 1, 'film_id' => film1.id })
+screening2 = Screening.new({ 'screening' => '13:00', 'screen' => 4, 'film_id' => film1.id })
 screening2.save()
+screening3 = Screening.new({ 'screening' => '16:00', 'screen' => 4, 'film_id' => film1.id })
+screening3.save()
+screening4 = Screening.new({ 'screening' => '20:00', 'screen' => 4, 'film_id' => film1.id })
+screening4.save()
+screening5 = Screening.new({ 'screening' => '23:00', 'screen' => 4, 'film_id' => film1.id })
+screening5.save()
 
 # Create a new instance of the Ticket class and pass it data
 # Call the save method on that instance
 ticket1 = Ticket.new({ 'screening' => screening1, 'customer' => customer2 })
 ticket1.save()
-
 ticket2 = Ticket.new({ 'screening' => screening2, 'customer' => customer2 })
 ticket2.save()
+ticket3 = Ticket.new({ 'screening' => screening3, 'customer' => customer2 })
+ticket3.save()
+ticket4 = Ticket.new({ 'screening' => screening4, 'customer' => customer2 })
+ticket4.save()
+ticket5 = Ticket.new({ 'screening' => screening4, 'customer' => customer2 })
+ticket5.save()
+ticket6 = Ticket.new({ 'screening' => screening4, 'customer' => customer2 })
+ticket6.save()
+ticket7 = Ticket.new({ 'screening' => screening3, 'customer' => customer2 })
+ticket7.save()
 
 # Update an existing instance of the Film class
 film1.title = ('Con Air')
@@ -70,9 +84,9 @@ customer1.update()
 
 # p film1.customers()
 # p customer1.films()
-# p film1.count_tickets()
+ p film1.count_tickets()
 # p screening1.tickets()
 # p customer2.count_tickets()
-#
-# p ticket1.film()
+# p screening1.film()
 # p ticket1.customer()
+p film1.find_most_popular_screening()

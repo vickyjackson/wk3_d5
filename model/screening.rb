@@ -32,11 +32,11 @@ class Screening
     return screening
   end
 
-  def films
-    sql = "SELECT films.* FROM films INNER JOIN tickets ON tickets.film_id = film_id WHERE tickets.screening_id = $1"
-    values = [@id]
-    result = SqlRunner.run(sql, values)
-    films = result.map { |film| Film.new(film) }
+  def film()
+    sql = "SELECT * FROM films WHERE id = $1"
+    values = [@film_id]
+    result = SqlRunner.run(sql, values)[0]
+    film = Film.new(result)
   end
 
   def tickets()
