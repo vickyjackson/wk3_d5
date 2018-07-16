@@ -31,10 +31,10 @@ screening2.save()
 
 # Create a new instance of the Ticket class and pass it data
 # Call the save method on that instance
-ticket1 = Ticket.new({ 'customer' => customer2, 'film_id' => film2.id, 'customer_id' => customer2.id, 'screening_id' => screening1.id })
+ticket1 = Ticket.new({ 'screening' => screening1, 'customer' => customer2 })
 ticket1.save()
 
-ticket2 = Ticket.new({ 'customer' => customer2, 'film_id' => film2.id, 'customer_id' => customer2.id, 'screening_id' => screening1.id })
+ticket2 = Ticket.new({ 'screening' => screening2, 'customer' => customer2 })
 ticket2.save()
 
 # Update an existing instance of the Film class
@@ -47,8 +47,8 @@ customer1.funds = 500
 customer1.update()
 
 # Update an existing instance of the Ticket class
-ticket1.customer_id = 1
-ticket1.update()
+# ticket1.customer_id = 1
+# ticket1.update()
 
 # # Delete a single existing film from the database via the relevant object
 # film1.delete()
@@ -71,8 +71,7 @@ ticket1.update()
 # p film1.customers()
 # p customer1.films()
 # p film1.count_tickets()
-binding.pry()
-p screening1.tickets()
+# p screening1.tickets()
 # p customer2.count_tickets()
 #
 # p ticket1.film()

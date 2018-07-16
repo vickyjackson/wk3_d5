@@ -7,38 +7,42 @@ require('pry')
 
 class Ticket
 
-  attr_reader :id, :film_id, :customer_id, :screening_id
-  attr_writer :film_id, :customer_id, :screening_id
+  attr_reader :id
 
   def initialize(options)
     @customer = options['customer']
+    @screening = options['screening']
     @id = options['id'].to_i if options['id'] != nil
-    @film_id = options['film_id'].to_i
-    @customer_id = options['customer_id'].to_i
-    @screening_id = options['screening_id'].to_i
+    if options['customer_id']
+      @customer = Customer.find_by_id(options['customer_id'])
+    end
+    if options['screening_id']
+      @screening = Screening.find_by_id(options['screening_id'])
+    end
   end
 
   # Create
   def save()
-    sql = "INSERT INTO tickets (film_id, customer_id, screening_id) VALUES ($1, $2, $3) RETURNING id"
-    values = [@film_id, @customer_id, @screening_id]
+    sql = "INSERT INTO tickets (customer_id, screening_id) VALUES ($1, $2) RETURNING id"
+    values = [@customer.id, @screening.id]
     result = SqlRunner.run(sql, values)
     @id = result[0]['id'].to_i
     charge_customer()
   end
 
   # Read
+
   def film()
     sql = "SELECT * FROM films WHERE id = $1"
-    values = [@film_id]
+    values = [@screening.film_id]
     result = SqlRunner.run(sql, values)[0]
     film = Film.new(result)
   end
 
   # Update
   def update()
-    sql = "UPDATE tickets SET (film_id, customer_id) = ($1, $2) WHERE id = $3"
-    values = [@film_id, @customer_id, @id]
+    sql = "UPDATE tickets SET (customer_id, screening_id) = ($1, $2) WHERE id = $3"
+    values = [@customer.id, @screening.id, @id]
     SqlRunner.run(sql, values)
   end
 

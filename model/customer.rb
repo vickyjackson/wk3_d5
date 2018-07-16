@@ -37,6 +37,14 @@ class Customer
     return tickets
   end
 
+  def self.find_by_id(id)
+    sql = "SELECT * from customers WHERE id = $1"
+    values = [id]
+    result = SqlRunner.run(sql, values)[0]
+    customer = Customer.new(result)
+    return customer
+  end
+
   # Update
   def update()
     sql = "UPDATE customers SET (name, funds) = ($1, $2) WHERE id = $3"
